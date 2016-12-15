@@ -1,9 +1,9 @@
 $(document).ready(function() {
 
-  DURATION = 60*60*2;
+  DURATION = 60*60*3;
   ANNOUNCEMENTS = [
-    new Announcement(60*60, "We recommend moving onto 4 if you haven't already."),
-    new Announcement(30*60, "We recommend moving onto 6 if you haven't already."),
+    new Announcement(2*60*60, "We recommend moving onto 4 if you haven't already."),
+    new Announcement(60*60, "We recommend moving onto 6 if you haven't already."),
     new Announcement(15*60, "Out of courtesy for your classmates, do not leave the exam room at this time."),
     new Announcement(5*60, "Remember to write SID at the top of each page.")
   ];
