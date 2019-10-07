@@ -58,7 +58,8 @@ p, li {
 
 .timer{
   position: absolute;
-  top: 0;
+  bottom: 0;
+  right: 0;
   border: 1px solid black;
   background-color: #FFF
 }
