@@ -91,12 +91,13 @@ $(document).ready(function() {
     $('.time .minutes').html(pad(minutes, 2));
     $('.time .seconds').html(pad(seconds, 2));
 
+    /*
     for (var i = 0; i < ANNOUNCEMENTS.length; i++) {
       announcement = ANNOUNCEMENTS[i];
       if (remaining == announcement.remaining()) {
         $('.announcement').html(announcement.message());
       }
-    }
+    }*/
   }
 
   /**
