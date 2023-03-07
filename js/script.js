@@ -36,6 +36,13 @@ $(document).ready(function() {
      * Start the timer.
      */
     this.start = function() {
+      const prevStart = Cookies.get("exam_start");
+      // set cookie if not set already
+      if (!prevStart) {
+        const now = Date.now();
+        Cookies.set("exam_start", now);
+      }
+      // set interval if not set already
       if (!interval) {
         interval = setInterval(tick, 1000);
       }
@@ -44,7 +51,7 @@ $(document).ready(function() {
     /**
      * Pause the timer, without resetting the count.
      */
-    this.pause = function() {
+    this.clearInterval = function() {
       clearInterval(interval);
     }
 
@@ -52,8 +59,9 @@ $(document).ready(function() {
      * Stop the timer, resetting count.
      */
     this.stop = function() {
-      this.pause();
+      this.clearInterval();
       seconds = 0;
+      Cookies.remove("exam_start");
     }
 
     /**
@@ -64,7 +72,9 @@ $(document).ready(function() {
     }
 
     tick = function() {
-      seconds += 1;
+      const start = Cookies.get("exam_start");
+      const now = Date.now();
+      seconds = Math.floor((now - start) / 1000);
       for (var i = 0; i < hooks.length;i++) {
         hook = hooks[i];
         hook(seconds);
@@ -113,7 +123,7 @@ $(document).ready(function() {
    */
   var timer = new Timer(DURATION);
   timer.addHook(function(seconds) {
-    if (DURATION - seconds == 0) {
+    if (DURATION - seconds <= 0) {
       examFinished();
       timer.stop();
     }
@@ -121,6 +131,9 @@ $(document).ready(function() {
   timer.addHook(function(seconds) {
     updateTimer(DURATION - seconds);
   });
+  if (Cookies.get("exam_start") !== undefined) {
+    timer.start();
+  }
 });
 
 /**
